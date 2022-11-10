@@ -2,7 +2,7 @@ import itertools
 import random
 import string
 
-
+#Reference: https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits
 def KeyGneration(length):
     #It generates a random key of uppercase letters of a given length
     alphabet = string.ascii_uppercase
