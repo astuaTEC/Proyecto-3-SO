@@ -3,7 +3,7 @@ import random
 import string
 
 #Reference: https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits
-def KeyGneration(length):
+def KeyGeneration(length):
     #It generates a random key of uppercase letters of a given length
     alphabet = string.ascii_uppercase
     return ''.join(random.choice(alphabet) for _ in range(length))
@@ -16,9 +16,9 @@ def KeyCombinations(length):
 
 
 if __name__ == '__main__':
-    for _ in range(10):
-        print(KeyGneration(5))
+    for _ in range(5):
+        print(KeyGeneration(10))
 
     with open('KeysAllow.txt', 'w') as f:
-        for key in KeyCombinations(4):
+        for key in KeyCombinations(3):
             f.write(f'{key}\n')
