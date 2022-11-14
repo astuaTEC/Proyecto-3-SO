@@ -4,77 +4,88 @@ import sys
 
 import rc4 as rc4
 from GenerateKey import KeyGeneration, KeyCombinations
-from stats import cpu_usage
+from stats import cpuStats
 
-def name_backup(filename):
-    """
-    It takes a filename, splits it into a list of strings, inserts '_backup.' into the list, and then
-    joins the list back into a string
-    :param filename: the name of the file to be backed up
-    :return: the filename with '_backup' inserted before the file extension.
-    """
-    f = filename.split('.')
-    f.insert(len(f)-1, '_backup.')
-    return ''.join(f)
+# PRINT COLORS
+OKBLUE = '\033[94m'
+OKCYAN = '\033[96m'
+OKGREEN = '\033[92m'
+PINK = '\033[95m'
+RED = '\033[31m'
+BLUE = '\033[34m'
+WARNING = '\033[93m'
+FAIL = '\033[91m'
+ENDC = '\033[0m'
+PURPLE = '\033[35m'
 
-def encrypt(filename, key_len):
-    """
-    It reads the content of the file, writes it to a backup file, generates a random key, encrypts the
-    content with the key, and writes the encrypted content to the original file
-    :param filename: the name of the file to encrypt
-    :param key_len: The length of the key to be used for encryption
-    """
+"""
+Toma un archivo dato, se genera una clave de un determinado tamaño y
+luego se encripta con el algoritmo rc4. Además genera un archivo de respaldo
+que posteriormente sirve para comprobar si se desencripta correctamente
+@param filename: el nombre del archivo a encriptar
+@param keyLen: El tamaño de la llave que se va a usar
+"""
+def encrypt(filename, keyLen):
     with open(filename, 'r') as f:
         content = f.read()
 
-    with open(name_backup(filename), 'w') as f:
+    with open(nameAux(filename), 'w') as f:
         f.write(content)
 
-    secret_key = KeyGeneration(key_len)
-    print('-'*60)
-    print(f'Encrypting with key of size: {key_len}')
-    print(f'Generated key: {secret_key}\n')
-    encrypted_content = rc4.encrypt(content, secret_key)
+    keyGenerated = KeyGeneration(keyLen)
+    print(OKGREEN + '+'*50 + ENDC)
+    print(f'Tamaño de la llave: {keyLen}')
+    print(f'Llave usada para encriptar: {keyGenerated}\n')
+    encryptedContent = rc4.encrypt(content, keyGenerated)
 
     with open(filename, 'w') as f:
-        f.write(str(encrypted_content))
+        f.write(str(encryptedContent))
 
-@cpu_usage
-def decrypt_bf(filename, key_len):
-    """
-    It reads the encrypted file, reads the original file, and then tries every possible key combination
-    until it finds the one that decrypts the encrypted file to the original file
-    :param filename: the name of the file to be decrypted
-    :param key_len: The length of the key used to encrypt the file
-    """
+"""
+Toma el archivo encriptado, se generan todas las posibles llaves para probar
+desencriptarlo hasta que el resultado sea igual que el archivo original, en este
+caso el de respaldo
+@param filename: nombre del archivo a desencriptar
+@param keyLen: El tamaño de la llave que se va a usar
+"""
+@cpuStats
+def decryptBruteForce(filename, keyLen):
     with open(filename, 'r') as f:
-        encrypted_content = f.read()
+        encryptedContent = f.read()
 
-    with open(name_backup(filename), 'r') as f:
-        original_content = f.read()
+    with open(nameAux(filename), 'r') as f:
+        originalContent = f.read()
 
-    count = 0
-    for key in KeyCombinations(key_len):
-        count+=1
+    counter = 0
+    for key in KeyCombinations(keyLen):
+        counter += 1
         sys.stdout.write('\033[F')
-        print(f'Proven key: {"".join(key)} ... [{count}/{26**key_len}]')
-        decrypted_content = rc4.decrypt(encrypted_content, key)
-        if original_content == str(decrypted_content):
+        print(f'Llave probada: {"".join(key)} -> [{counter}/{26**keyLen}]') #26 es por las letras del abecedario inglés
+        decryptedContent = rc4.decrypt(encryptedContent, key)
+        if originalContent == str(decryptedContent):
             with open(filename, 'w') as f:
-                f.write(str(decrypted_content))
-            print(f'Decrypted with key: {"".join(key)}')
+                f.write(str(decryptedContent))
+            print(f'Desencriptado con la llave: {"".join(key)}')
             break
+    print(OKGREEN + '+'*50 + ENDC)
 
+
+"""
+Toma el nombre original y le agrega un -bk 
+@param filename: el nombre del archivo a generarle el nombre con el bk
+@return: el nombre del archivo con el -bk agregado
+"""
+def nameAux(filename):
+    f = filename.split('.')
+    f.insert(len(f)-1, '-bk.')
+    return ''.join(f)
 
 if __name__ == '__main__':
-    """
-    It takes a filename and a key length as arguments, encrypts the file, and then decrypts it using a
-    brute force method
-    """
-    filename = str(sys.argv[1])
-    key_len = int(sys.argv[2])
 
-    encrypt(filename, key_len)
-    decrypt_bf(filename, key_len)
+    filename = str(sys.argv[1]) # first argument
+    keyLen = int(sys.argv[2]) # second argument
 
-    os.remove(name_backup(filename))
+    encrypt(filename, keyLen)
+    decryptBruteForce(filename, keyLen)
+
+    os.remove(nameAux(filename)) #se elimina el archivo de respaldo
