@@ -28,7 +28,7 @@ def cpuStats(func):
         time_elapsed = final_time - initial_time
         print(RED + '*'*50 + ENDC)
         print(f'{WARNING}Tiempo transcurrido: {time_elapsed}')
-        print(f'{OKBLUE}Procentaje CPU: {psutil.cpu_percent()} %')
+        print(f'{OKBLUE}Porcentaje CPU: {psutil.cpu_percent()} %')
         print(f'{ORANGE}Estadísticas del CPU: {psutil.cpu_stats()}')
         print(f'{OKCYAN}Memoria RAM: {psutil.virtual_memory().percent} %{ENDC}')
         print(RED + '*'*50 + ENDC)
