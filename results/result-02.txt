@@ -1,0 +1,110 @@
+******** Experimento 1 ******************
+
+Time taken: 53.83067035675049 s
+Termino... 10000
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+Tamaño de la llave: 1
+Llave usada para encriptar: K
+Llave probada: K -> [11/26]
+Desencriptado con la llave: K
+++++++++++++++++++++++++++++++++++++++++++++++++++
+**************************************************
+Tiempo transcurrido: 0:00:00.014629
+Porcentaje CPU: 85.7 %
+Estadísticas del CPU: scpustats(ctx_switches=302808234, interrupts=58874113, soft_interrupts=18832407, syscalls=0)
+Memoria RAM: 21.9 %
+**************************************************
+
+Luego del ataque
+
+Time taken: 54.351550340652466 s
+Termino... 10000
+
+********* Experimento 2 *****************
+Time taken: 53.79906415939331 s
+Termino... 10000
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+Tamaño de la llave: 2
+Llave usada para encriptar: AL
+Llave probada: AL -> [12/676]
+Desencriptado con la llave: AL
+++++++++++++++++++++++++++++++++++++++++++++++++++
+**************************************************
+Tiempo transcurrido: 0:00:00.031108
+Porcentaje CPU: 92.9 %
+Estadísticas del CPU: scpustats(ctx_switches=303291477, interrupts=59274601, soft_interrupts=19019666, syscalls=0)
+Memoria RAM: 22.2 %
+**************************************************
+
+Despues del ataque
+Time taken: 54.07229518890381 s
+Termino... 10000
+
+****** Experimento 3 **************
+
+Time taken: 53.760804653167725 s
+Termino... 10000
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+Tamaño de la llave: 3
+Llave usada para encriptar: TLZ
+Llave probada: TLZ -> [13156/17576]
+Desencriptado con la llave: TLZ
+++++++++++++++++++++++++++++++++++++++++++++++++++
+**************************************************
+Tiempo transcurrido: 0:00:14.883431
+Porcentaje CPU: 95.4 %
+Estadísticas del CPU: scpustats(ctx_switches=304142019, interrupts=59646200, soft_interrupts=19197630, syscalls=0)
+Memoria RAM: 31.4 %
+**************************************************
+
+Despues del ataque
+
+Time taken: 61.05855369567871 s
+Termino... 10000
+
+*********** Experimento 4 *****************
+Time taken: 53.90674805641174 s
+Termino... 10000
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+Tamaño de la llave: 4
+Llave usada para encriptar: FYYF
+Llave probada: FYYF -> [104734/456976]
+Desencriptado con la llave: FYYF
+++++++++++++++++++++++++++++++++++++++++++++++++++
+**************************************************
+Tiempo transcurrido: 0:01:56.240656
+Porcentaje CPU: 94.7 %
+Estadísticas del CPU: scpustats(ctx_switches=308174369, interrupts=60615740, soft_interrupts=19552524, syscalls=0)
+Memoria RAM: 19.9 %
+**************************************************
+
+Despues del ataque
+Time taken: 95.6900806427002 s
+Termino... 10000
+
+*********************** Experimento 5 ************
+Time taken: 53.845083236694336 s
+Termino... 10000
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+Tamaño de la llave: 5
+Llave usada para encriptar: KFHQK
+Llave probada: KFHQK -> [4662799/11881376]
+Desencriptado con la llave: KFHQK
+++++++++++++++++++++++++++++++++++++++++++++++++++
+**************************************************
+Tiempo transcurrido: 1:17:59.126257
+Porcentaje CPU: 89.9 %
+Estadísticas del CPU: scpustats(ctx_switches=461603445, interrupts=89430602, soft_interrupts=27932145, syscalls=0)
+Memoria RAM: 20.6 %
+**************************************************
+
+Despues del ataque
+
+Time taken: 94.09158658981323 s
+Termino... 10000
